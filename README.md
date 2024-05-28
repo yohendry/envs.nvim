@@ -37,7 +37,7 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 ```
 
 ## 3. usage
-- `:PrintEnv`
+- `:ShowEnv`
 - use `open_mapping` hotkey
 
 to show ENV value under cursor
