@@ -1,6 +1,6 @@
-local file_exists = require("file-exist")
-local lines_from = require("lines-from")
-local split = require("split")
+local file_exists = require("envs.file-exist")
+local lines_from = require("envs.lines-from")
+local split = require("envs.split")
 
 return function(callback)
 	local cword = vim.fn.expand("<cword>")
