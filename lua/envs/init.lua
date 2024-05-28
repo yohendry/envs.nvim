@@ -16,12 +16,5 @@ M.setup = function(opts)
 			M.hover_popup(" " .. result .. " ", opts)
 		end
 	end, {})
-
-	vim.keymap.set(
-		"n",
-		opts.open_mappings,
-		[[<cmd>ShowEnv<cr>]],
-		{ buffer = 0, desc = "Show ENV variable under cursor" }
-	)
 end
 return M
