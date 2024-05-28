@@ -38,14 +38,14 @@ nvim plugin that shows the value of system wide or project specific enviroment v
   - [4. screenshots](#4-screenshots)
 <!--toc:end-->
 
-## 1. install
+## Install
 
 ### lazy
 ```lua
 { "yohendry/envs.nvim", config = true }
 ```
 
-## 2. config
+## Config
 ```lua
 {
 	popup = true, -- display a popup window relative to the cursor
@@ -59,11 +59,11 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 }
 ```
 
-## 3. usage
+## Usage
 - `:ShowEnv`
 - use `open_mapping` hotkey
 
 to show ENV value under cursor
 
-## 4. screenshots
+## Screenshots
 
