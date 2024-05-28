@@ -1,7 +1,7 @@
 local M = {}
 
-M.get_env_value = require("get_env_value")
-M.show_popup = require("show-popup")
+M.get_env_value = require("envs.get_env_value")
+M.show_popup = require("envs.show-popup")
 
 M.setup = function(opts)
 	vim.api.nvim_create_user_command("ShowEnv", function()
