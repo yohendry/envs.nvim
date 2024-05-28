@@ -31,11 +31,11 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 <!--toc:start-->
 - [envs.nvim](#envsnvim)
 - [tl;dr](#tldr)
-  - [1. install](#1-install)
+  - [Install](#install)
     - [lazy](#lazy)
-  - [2. config](#2-config)
-  - [3. usage](#3-usage)
-  - [4. screenshots](#4-screenshots)
+  - [Config](#config)
+  - [Usage](#usage)
+  - [Screenshots](#screenshots)
 <!--toc:end-->
 
 ## Install
