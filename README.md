@@ -1,5 +1,8 @@
+# NOT WORKING RN
+
 # envs.nvim
 nvim plugin that shows the value of system wide or project specific enviroment variable under the cursor
+
 
 ## 1. install
 
@@ -26,6 +29,8 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 ## 3. usage
 - `:PrintEnv`
 - use `open_mapping` hotkey
+
+to show ENV value under cursor
 
 ## 4. screenshots
 
