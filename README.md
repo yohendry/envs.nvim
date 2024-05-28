@@ -1,18 +1,42 @@
+
+
+
+# envs.nvim
+nvim plugin that shows the value of system wide or project specific enviroment variable under the cursor
+
+# tl;dr
+```lua
+{
+	"yohendry/envs.nvim",
+	event = "LspAttach",
+	config = function()
+		require("envs").setup({
+			popup = true, -- display a popup window relative to the cursor
+			print = false, -- prnts the env value to `messages`
+			window = {
+				title = "   envs ", -- popup window title
+				border = "double", -- popup border style
+				style = "minimal", -- popup window style
+			},
+			close_mappings = { "q", "<Esc>" }, -- key bindigs to close the popup
+		})
+		vim.keymap.set("n", "E", "<cmd>ShowEnv<cr>", { buffer = 0, desc = "Show Env variable value under cursor" })
+	end,
+	name = "envs",
+}
+
+```
+
+
 <!--toc:start-->
-- [NOT WORKING RN](#not-working-rn)
 - [envs.nvim](#envsnvim)
+- [tl;dr](#tldr)
   - [1. install](#1-install)
     - [lazy](#lazy)
   - [2. config](#2-config)
   - [3. usage](#3-usage)
   - [4. screenshots](#4-screenshots)
 <!--toc:end-->
-
-# NOT WORKING RN
-
-# envs.nvim
-nvim plugin that shows the value of system wide or project specific enviroment variable under the cursor
-
 
 ## 1. install
 
@@ -27,12 +51,11 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 	popup = true, -- display a popup window relative to the cursor
 	print = true, -- prnts the env value to `messages`
 	window = {
-		title = "   print env ", -- popup window title
+		title = "   envs ", -- popup window title
 		border = "single", -- popup border style
 		style = "minimal", -- popup window style
 	},
 	close_mappings = { "q", "<Esc>" }, -- kesy bindigs for the popup to close
-	open_mapping = "<C-e>", -- key bindigs for show or print the ENV value
 }
 ```
 
