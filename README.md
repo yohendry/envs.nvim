@@ -1,3 +1,13 @@
+<!--toc:start-->
+- [NOT WORKING RN](#not-working-rn)
+- [envs.nvim](#envsnvim)
+  - [1. install](#1-install)
+    - [lazy](#lazy)
+  - [2. config](#2-config)
+  - [3. usage](#3-usage)
+  - [4. screenshots](#4-screenshots)
+<!--toc:end-->
+
 # NOT WORKING RN
 
 # envs.nvim
