@@ -39,7 +39,7 @@ return function(text, options)
 	local title = "    print env  "
 
 	if options.window.style ~= nil then
-		style = options.window .. style
+		style = options.window.style
 	end
 	if options.window.border ~= nil then
 		border = options.window.border
