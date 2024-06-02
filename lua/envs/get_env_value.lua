@@ -1,50 +1,33 @@
-local file_exists = require("envs.file-exist")
-local read_lines = require("envs.read-lines")
-local split = require("envs.split")
 local utils = require("envs.util")
-local get_envs_in_path = function(path)
-	local envs = {}
-
-	local files = { ".env", ".env.local" }
-	for _, file in ipairs(files) do
-		local filePath = utils.path_join(path, file)
-		if file_exists(filePath) then
-			local lines = read_lines(filePath)
-
-			for _, line in ipairs(lines) do
-				local response = split(line, "=")
-
-				if response ~= false then
-					local envName, envValue = unpack(response)
-
-					envs[envName] = envValue
-				end
-			end
-		end
-	end
-	return envs
-end
-
+local get_envs_in_path = require("envs.get_envs_in_path")
 local get_env_display_value = function(key, value)
 	return key .. "=" .. value
 end
-return function(callback)
-	local cword = vim.fn.expand("<cword>")
-	local result = "¯\\_(ツ)_/¯ " .. cword .. " not found"
-	local root = vim.fn.getcwd()
 
-	local root_parts = utils.split(root, utils.path_separator)
-	-- TODO: needs to check for windows start path, maybe from opts
-	local current_path = utils.path_separator
+-- ZSH_THEME ZSH
+
+return function(callback, not_found_prefix)
+	local cword = vim.fn.expand("<cword>") -- get current word
+	local result = not_found_prefix .. "'" .. cword .. "' ENV variable not found" -- initialize with word not gound
+
+	local root = vim.fn.getcwd() -- get current working directory
+	local root_parts = utils.split(root, utils.path_separator) -- devide root path into each folder
+
+	local current_path = utils.path_separator -- start current path with '/' for unix systems
 	if utils.is_windows then
-		current_path = "C:" .. utils.path_separator
+		current_path = "C:" .. utils.path_separator -- replace current path with 'C:\' in case of windows
 	end
+
 	local envs = {}
+
 	for _, folder in ipairs(root_parts) do -- iterate over the folders in search of the env files
 		current_path = utils.path_join(current_path, folder)
-		vim.tbl_extend("force", envs, get_envs_in_path(current_path))
+		local current_envs = get_envs_in_path(current_path)
+		envs = vim.tbl_extend("force", envs, current_envs)
 	end
+
 	local value_local = envs[cword]
+
 	if value_local ~= nil then
 		result = get_env_display_value(cword, value_local)
 	else -- if no env file contains the value, we search in the system
@@ -53,8 +36,10 @@ return function(callback)
 			result = get_env_display_value(cword, value)
 		end -- Checks if current word is an environment variable
 	end
+
 	if type(callback) == "function" then
 		callback({ result })
 	end
+
 	return result
 end

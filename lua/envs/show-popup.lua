@@ -4,7 +4,7 @@ local _close_window = function(win)
 	end
 end
 
-return function(text, options)
+return function(text, options, window_list)
 	-- reduce signcolumn/foldcolumn from window width
 	local function effective_win_width()
 		local win_width = vim.fn.winwidth(0)
@@ -36,7 +36,7 @@ return function(text, options)
 
 	local style = "minimal"
 	local border = "single"
-	local title = "    print env  "
+	local title = "    envs  "
 
 	if options.window.style ~= nil then
 		style = options.window.style
@@ -60,10 +60,14 @@ return function(text, options)
 		border = border,
 		title = title,
 	})
+	table.insert(window_list, popup)
 	local group = vim.api.nvim_create_augroup("envs_floating_node", { clear = true })
 
 	local close_window = function()
-		_close_window(popup)
+		for _, window in ipairs(window_list) do
+			_close_window(window)
+		end
+		window_list = {}
 	end
 	vim.api.nvim_win_call(popup, function()
 		vim.api.nvim_buf_set_lines(0, 0, -1, true, { text })
