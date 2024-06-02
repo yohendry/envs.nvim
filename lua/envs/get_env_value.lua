@@ -25,6 +25,7 @@ return function(callback, not_found_prefix)
 		local current_envs = get_envs_in_path(current_path)
 		envs = vim.tbl_extend("force", envs, current_envs)
 	end
+
 	local value_local = envs[cword]
 
 	if value_local ~= nil then

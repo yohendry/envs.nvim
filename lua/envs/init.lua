@@ -3,7 +3,7 @@ local M = {}
 M.get_env_value = require("envs.get_env_value")
 M.show_popup = require("envs.show-popup")
 M.opts = require("envs.defaults")
-M.active_window = nil
+M.window_list = {}
 M.setup = function(opts)
 	if opts ~= nil and vim.tbl_count(opts) > 0 then
 		opts = vim.tbl_extend("force", M.opts, opts)
@@ -21,7 +21,7 @@ M.setup = function(opts)
 		local result = M.get_env_value(callback, opts.not_found_prefix)
 
 		if opts.popup then
-			M.show_popup(" " .. result .. " ", opts)
+			M.show_popup(" " .. result .. " ", opts, M.window_list)
 		end
 	end, {})
 end
