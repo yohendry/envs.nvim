@@ -4,27 +4,16 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 # tl;dr
 ```lua
 {
-	"yohendry/envs.nvim",
-	event = "LspAttach",
-	config = function()
-		require("envs").setup({
-			popup = true, -- display a popup window relative to the cursor
-			print = false, -- prnts the env value to `messages`
-			window = {
-				title = "   envs ", -- popup window title
-				border = "double", -- popup border style
-				style = "minimal", -- popup window style
-			},
-			close_mappings = { "q", "<Esc>" }, -- key bindigs to close the popup
-		})
-		vim.keymap.set("n", "E", "<cmd>ShowEnv<cr>", { buffer = 0, desc = "Show Env variable value under cursor" })
-	end,
-	name = "envs",
+    "yohendry/envs.nvim",
+    event = { "BufRead", "BufNew" },
+    config = true,
+    name = "envs",
+    keys = {
+        { "<C-;>", "<cmd>ShowEnv<cr>", desc = "Lookup as ENV var" },
+    },
 }
 
 ```
-
-
 <!--toc:start-->
 - [envs.nvim](#envsnvim)
 - [tl;dr](#tldr)
@@ -39,7 +28,19 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 
 ### lazy
 ```lua
-{ "yohendry/envs.nvim", config = true }
+{
+    "yohendry/envs.nvim",
+    event = { "BufRead", "BufNew" },
+    config = function()
+        require("envs").setup({
+            not_found_prefix = "¯\\_(ツ)_/¯ "
+        })
+    end,
+    name = "envs",
+    keys = {
+        { "<C-;>", "<cmd>ShowEnv<cr>", desc = "Lookup as ENV var" },
+    },
+}
 ```
 
 ## Config
@@ -52,7 +53,8 @@ nvim plugin that shows the value of system wide or project specific enviroment v
 		border = "single", -- popup border style
 		style = "minimal", -- popup window style
 	},
-	close_mappings = { "q", "<Esc>" }, -- kesy bindigs for the popup to close
+	not_found_prefix = " ",
+	close_mappings = { "q", "<Esc>" }, -- key bindigs to close the popup
 }
 ```
 
