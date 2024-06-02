@@ -6,6 +6,6 @@ return {
 		border = "double", -- popup border style
 		style = "minimal", -- popup window style
 	},
-	not_found_prefix = "¯\\_(ツ)_/¯ ",
+	not_found_prefix = " ",
 	close_mappings = { "q", "<Esc>" }, -- key bindigs to close the popup
 }
