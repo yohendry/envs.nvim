@@ -1,6 +1,3 @@
-
-
-
 # envs.nvim
 nvim plugin that shows the value of system wide or project specific enviroment variable under the cursor
 
