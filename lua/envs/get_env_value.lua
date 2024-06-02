@@ -1,43 +1,21 @@
-local file_exists = require("envs.file-exist")
-local read_lines = require("envs.read-lines")
-local split = require("envs.split")
 local utils = require("envs.util")
-local get_envs_in_path = function(path)
-	local envs = {}
-
-	local files = { ".env", ".env.local" }
-	for _, file in ipairs(files) do
-		local filePath = utils.path_join(path, file)
-		if file_exists(filePath) then
-			local lines = read_lines(filePath)
-
-			for _, line in ipairs(lines) do
-				local response = split(line, "=")
-
-				if response ~= false then
-					local envName, envValue = unpack(response)
-
-					envs[envName] = envValue
-				end
-			end
-		end
-	end
-	return envs
-end
+local get_envs_in_path = require("envs.get_envs_in_path")
 
 local get_env_display_value = function(key, value)
 	return key .. "=" .. value
 end
-return function(callback)
-	local cword = vim.fn.expand("<cword>")
-	local result = "¯\\_(ツ)_/¯ " .. cword .. " not found"
-	local root = vim.fn.getcwd()
 
-	local root_parts = utils.split(root, utils.path_separator)
-	-- TODO: needs to check for windows start path, maybe from opts
-	local current_path = utils.path_separator
+-- ZSHHOME ZSH_HOME
+
+return function(callback)
+	local cword = vim.fn.expand("<cword>") -- get current word
+	local result = "¯\\_(ツ)_/¯ " .. cword .. " not found" -- initialize with word not gound
+	local root = vim.fn.getcwd() -- get current working directory
+	vim.print(root, utils.path_separator)
+	local root_parts = utils.split(root, utils.path_separator) -- devide root path into each folder
+	local current_path = utils.path_separator -- start current path with '/' for unix systems
 	if utils.is_windows then
-		current_path = "C:" .. utils.path_separator
+		current_path = "C:" .. utils.path_separator -- replace current path with 'C:\' in case of windows
 	end
 	local envs = {}
 	for _, folder in ipairs(root_parts) do -- iterate over the folders in search of the env files
