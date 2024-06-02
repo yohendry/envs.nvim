@@ -8,7 +8,7 @@ end
 
 return function(callback, not_found_prefix)
 	local cword = vim.fn.expand("<cword>") -- get current word
-	local result = not_found_prefix .. "¯\\_(ツ)_/¯ " .. cword .. " not found" -- initialize with word not gound
+	local result = not_found_prefix .. "'" .. cword .. "' ENV variable not found" -- initialize with word not gound
 
 	local root = vim.fn.getcwd() -- get current working directory
 	local root_parts = utils.split(root, utils.path_separator) -- devide root path into each folder

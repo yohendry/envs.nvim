@@ -36,7 +36,7 @@ return function(text, options)
 
 	local style = "minimal"
 	local border = "single"
-	local title = "    print env  "
+	local title = "    envs  "
 
 	if options.window.style ~= nil then
 		style = options.window.style
