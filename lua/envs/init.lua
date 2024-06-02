@@ -10,7 +10,7 @@ M.setup = function(opts)
 		if opts.print == true then
 			callback = vim.print
 		end
-		local result = M.get_env_value(callback)
+		local result = M.get_env_value(callback, opts.not_found)
 
 		if opts.popup then
 			M.show_popup(" " .. result .. " ", opts)
